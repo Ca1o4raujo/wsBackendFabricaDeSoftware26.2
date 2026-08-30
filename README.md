@@ -160,13 +160,6 @@ Caso não seja informado o parâmetro `q`, a API retorna o código `400`. Se a O
 - `requirements.txt`: lista as bibliotecas necessárias.
 - `.gitignore`: evita enviar arquivos locais, como `venv` e `__pycache__`, ao GitHub.
 
-## Como validar o projeto
+## Autor
 
-Com o ambiente virtual ativado, execute:
-
-```powershell
-python manage.py check
-python manage.py test
-```
-
-O primeiro comando verifica erros de configuração. O segundo executa os testes automatizados do projeto.
+Desenvolvido por **Caio Araujo Belo** para o Workshop de Backend — Fábrica de Software 26.2.
