@@ -21,17 +21,28 @@ Você precisa ter o Python instalado. Para conferir, abra o PowerShell e execute
 python --version
 ```
 
-Também abra o terminal dentro da pasta do projeto:
+Em seguida, clone o repositório e entre na pasta criada. Substitua `URL_DO_REPOSITORIO` pela URL copiada no GitHub:
 
 ```powershell
-cd "C:\Users\caioa\OneDrive\Documentos\GitHub\wsBackendFabricaDeSoftware26.2"
+git clone URL_DO_REPOSITORIO
+cd wsBackendFabricaDeSoftware26.2
 ```
 
 ## Passo a passo para executar
 
-### 1. Ativar o ambiente virtual
+### 1. Criar o ambiente virtual
 
 O ambiente virtual (`venv`) mantém as bibliotecas deste projeto separadas das demais bibliotecas do computador.
+
+No PowerShell, execute:
+
+```powershell
+python -m venv venv
+```
+
+Esse comando cria uma pasta chamada `venv`. Ela é ignorada pelo Git, então cada pessoa que clonar o projeto deve criá-la em seu próprio computador.
+
+### 2. Ativar o ambiente virtual
 
 No PowerShell, execute:
 
@@ -43,7 +54,7 @@ Se funcionar, o terminal mostrará `(venv)` no começo da linha.
 
 > Se o PowerShell bloquear o script, execute uma vez: `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` e tente o comando novamente.
 
-### 2. Instalar as dependências
+### 3. Instalar as dependências
 
 As dependências são bibliotecas necessárias para o projeto funcionar. O arquivo `requirements.txt` lista todas elas.
 
@@ -51,7 +62,7 @@ As dependências são bibliotecas necessárias para o projeto funcionar. O arqui
 pip install -r requirements.txt
 ```
 
-### 3. Preparar o banco de dados
+### 4. Preparar o banco de dados
 
 Este comando cria e atualiza as tabelas usadas pelo projeto no banco SQLite local.
 
@@ -59,7 +70,7 @@ Este comando cria e atualiza as tabelas usadas pelo projeto no banco SQLite loca
 python manage.py migrate
 ```
 
-### 4. Iniciar o servidor
+### 5. Iniciar o servidor
 
 ```powershell
 python manage.py runserver
