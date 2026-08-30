@@ -32,3 +32,49 @@ PUT    /api/livros/{id}/
 DELETE /api/livros/{id}/
 GET    /api/pesquisa-open-library/?q=machado+de+assis
 ```
+
+## Exemplos de uso
+
+Com o servidor em execução, a API estará disponível em `http://127.0.0.1:8000/api/`.
+
+### Criar um autor
+
+```powershell
+curl.exe -X POST http://127.0.0.1:8000/api/autores/ `
+  -H "Content-Type: application/json" `
+  -d "{\"nome\":\"Machado de Assis\",\"biografia\":\"Escritor brasileiro.\"}"
+```
+
+### Criar um livro
+
+Substitua `1` pelo identificador de um autor já cadastrado.
+
+```powershell
+curl.exe -X POST http://127.0.0.1:8000/api/livros/ `
+  -H "Content-Type: application/json" `
+  -d "{\"titulo\":\"Dom Casmurro\",\"sinopse\":\"Romance brasileiro.\",\"isbn\":\"9788508150167\",\"ano_publicacao\":1899,\"autor\":1}"
+```
+
+### Listar e atualizar livros
+
+```powershell
+curl.exe http://127.0.0.1:8000/api/livros/
+
+curl.exe -X PUT http://127.0.0.1:8000/api/livros/1/ `
+  -H "Content-Type: application/json" `
+  -d "{\"titulo\":\"Dom Casmurro\",\"sinopse\":\"Romance brasileiro.\",\"isbn\":\"9788508150167\",\"ano_publicacao\":1899,\"autor\":1}"
+```
+
+### Excluir um livro
+
+```powershell
+curl.exe -X DELETE http://127.0.0.1:8000/api/livros/1/
+```
+
+### Consultar a API externa
+
+```powershell
+curl.exe "http://127.0.0.1:8000/api/pesquisa-open-library/?q=machado+de+assis"
+```
+
+A consulta à Open Library não exige chave de API. Em caso de termo ausente, demora ou indisponibilidade da API externa, a aplicação retorna respostas JSON com os códigos HTTP `400`, `504` ou `502`, respectivamente.
