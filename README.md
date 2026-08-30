@@ -33,6 +33,10 @@ DELETE /api/livros/{id}/
 GET    /api/pesquisa-open-library/?q=machado+de+assis
 ```
 
+## Documentação Swagger
+
+Com o servidor em execução, abra `http://127.0.0.1:8000/api/docs/` para visualizar e testar os endpoints pela interface Swagger. O schema OpenAPI também está disponível em `http://127.0.0.1:8000/api/schema/`.
+
 ## Exemplos de uso
 
 Com o servidor em execução, a API estará disponível em `http://127.0.0.1:8000/api/`.

@@ -2,6 +2,7 @@ import requests
 from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 
 from .models import Autor, Livro
 from .serializers import AutorSerializer, LivroSerializer
@@ -21,6 +22,10 @@ class LivroViewSet(viewsets.ModelViewSet):
     serializer_class = LivroSerializer
 
 
+@extend_schema(
+    parameters=[OpenApiParameter(name='q', description='Termo para pesquisa de livros.', required=True, type=str)],
+    responses={200: dict},
+)
 @api_view(['GET'])
 def pesquisa_open_library(request):
     """Pesquisa livros na API externa Open Library pelo parâmetro ?q=."""
