@@ -23,16 +23,16 @@ class BibliotecaApiTests(APITestCase):
         self.assertTrue(Autor.objects.filter(nome='Clarice Lispector').exists())
 
     def test_pesquisa_sem_termo_retorna_400(self):
-        resposta = self.client.get(reverse('pesquisa-google-books'))
+        resposta = self.client.get(reverse('pesquisa-open-library'))
         self.assertEqual(resposta.status_code, 400)
 
     @patch('catalogo.views.requests.get')
     def test_pesquisa_retorna_livros_da_api(self, requisicao):
         resposta_externa = Mock()
         resposta_externa.json.return_value = {
-            'items': [{'id': 'abc', 'volumeInfo': {'title': 'Dom Casmurro', 'authors': ['Machado de Assis']}}]
+            'docs': [{'key': '/works/OL1W', 'title': 'Dom Casmurro', 'author_name': ['Machado de Assis']}]
         }
         requisicao.return_value = resposta_externa
-        resposta = self.client.get(reverse('pesquisa-google-books'), {'q': 'Machado de Assis'})
+        resposta = self.client.get(reverse('pesquisa-open-library'), {'q': 'Machado de Assis'})
         self.assertEqual(resposta.status_code, 200)
         self.assertEqual(resposta.data['livros'][0]['titulo'], 'Dom Casmurro')

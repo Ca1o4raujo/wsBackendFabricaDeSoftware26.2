@@ -5,7 +5,7 @@ API REST de biblioteca desenvolvida em Django para o Workshop de Backend — Fá
 ## Requisitos atendidos
 
 - CRUD JSON completo de `Autor` e `Livro`, relacionados por chave estrangeira.
-- Consulta à API pública Google Books para pesquisar obras por título, autor ou assunto.
+- Consulta à API pública Open Library para pesquisar obras por título, autor ou assunto.
 - Tratamento de erros de entrada, timeout, indisponibilidade e resposta inválida da API externa.
 - Arquivos obrigatórios: `.gitignore`, `requirements.txt` e este `README.md`.
 
@@ -30,5 +30,5 @@ POST   /api/livros/
 GET    /api/livros/{id}/
 PUT    /api/livros/{id}/
 DELETE /api/livros/{id}/
-GET    /api/pesquisa-google-books/?q=machado+de+assis
+GET    /api/pesquisa-open-library/?q=machado+de+assis
 ```

@@ -22,16 +22,16 @@ class LivroViewSet(viewsets.ModelViewSet):
 
 
 @api_view(['GET'])
-def pesquisa_google_books(request):
-    """Pesquisa livros na API externa Google Books pelo parâmetro ?q=."""
+def pesquisa_open_library(request):
+    """Pesquisa livros na API externa Open Library pelo parâmetro ?q=."""
     consulta = request.query_params.get('q', '').strip()
     if not consulta:
         return Response({'erro': 'Informe o termo de busca no parâmetro q.'}, status=status.HTTP_400_BAD_REQUEST)
 
     try:
         resposta = requests.get(
-            'https://www.googleapis.com/books/v1/volumes',
-            params={'q': consulta, 'maxResults': 5},
+            'https://openlibrary.org/search.json',
+            params={'q': consulta, 'limit': 5},
             timeout=8,
         )
         resposta.raise_for_status()
@@ -44,12 +44,12 @@ def pesquisa_google_books(request):
         return Response({'erro': 'A API externa retornou uma resposta inválida.'}, status=status.HTTP_502_BAD_GATEWAY)
 
     livros = []
-    for item in dados.get('items', []):
-        volume = item.get('volumeInfo', {})
+    for item in dados.get('docs', []):
         livros.append({
-            'id_externo': item.get('id'),
-            'titulo': volume.get('title'),
-            'autores': volume.get('authors', []),
-            'data_publicacao': volume.get('publishedDate'),
+            'id_externo': item.get('key'),
+            'titulo': item.get('title'),
+            'autores': item.get('author_name', []),
+            'ano_publicacao': item.get('first_publish_year'),
+            'isbn': item.get('isbn', [])[:3],
         })
-    return Response({'fonte': 'Google Books', 'consulta': consulta, 'livros': livros})
+    return Response({'fonte': 'Open Library', 'consulta': consulta, 'livros': livros})
