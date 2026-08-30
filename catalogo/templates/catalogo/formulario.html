@@ -1,0 +1,1 @@
+{% extends 'catalogo/base.html' %}{% block content %}<h2>{% if object %}Editar{% else %}Cadastrar{% endif %}</h2><form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Salvar</button></form>{% endblock %}

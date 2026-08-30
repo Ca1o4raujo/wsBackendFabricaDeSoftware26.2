@@ -1,0 +1,1 @@
+{% extends 'catalogo/base.html' %}{% block content %}<h2>Confirmar exclusão</h2><p>Deseja excluir "{{ object }}"?</p><form method="post">{% csrf_token %}<button type="submit">Excluir</button></form>{% endblock %}
